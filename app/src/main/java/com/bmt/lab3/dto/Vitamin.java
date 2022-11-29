@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class Vitamin {
+import java.io.Serializable;
+
+public class Vitamin implements Serializable {
     private String title;
     private String description;
     private String guid;

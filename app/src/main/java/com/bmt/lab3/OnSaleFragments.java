@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.adapter.RecyclerAdapter;
-import com.bmt.lab3.dto.Category;
 import com.bmt.lab3.dto.OnSale;
 import com.bmt.lab3.util.LoadData;
 

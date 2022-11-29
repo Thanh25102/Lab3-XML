@@ -1,5 +1,6 @@
 package com.bmt.lab3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -7,13 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.core.os.HandlerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.adapter.RecyclerAdapter;
-import com.bmt.lab3.const2.FRAGMENT;
 import com.bmt.lab3.const2.URL;
 import com.bmt.lab3.dto.Category;
 import com.bmt.lab3.dto.Result;
@@ -22,6 +21,7 @@ import com.bmt.lab3.repository.VitaminRepository;
 import com.bmt.lab3.util.LoadData;
 import com.bmt.lab3.util.VitaminParser;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -77,18 +77,22 @@ public class CategoryFragments extends Fragment {
         List<Category> datas = loadData.getCategories();
         recyclerView = view.findViewById(R.id.recyclerView);
 
+
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+        Handler mainThreadHandler = HandlerCompat.createAsync(Looper.getMainLooper());
+        VitaminParser vitaminParser = VitaminParser.getInstance();
+
         recyclerAdapter = new RecyclerAdapter<>(category->{
-            ExecutorService executor = Executors.newFixedThreadPool(4);
-            Handler mainThreadHandler = HandlerCompat.createAsync(Looper.getMainLooper());
-            VitaminParser vitaminParser = VitaminParser.getInstance();
             if(category.getParserDTO().equals(Vitamin.class)){
                 VitaminRepository vitaminRepository = new VitaminRepository(vitaminParser,executor,mainThreadHandler);
+                Intent loading = new Intent(getContext(),LoadingActivity.class);
+                startActivity(loading);
                 vitaminRepository.makeVitaminRequest(URL.VITAMIN_ALL,(callBack)->{
                     if(callBack instanceof Result.Success){
                         List<Vitamin> data = ((Result.Success<Vitamin>) callBack).datas;
-                        for(Vitamin v : data){
-                            Log.i("vitamin", v.toString());
-                        }
+                        Intent intent = new Intent(getContext(),SubActivity.class);
+                        intent.putExtra("data",(Serializable) data);
+                        startActivity(intent);
                     } else {
                         Exception exception = ((Result.Error<Vitamin>) callBack).exception;
                         Log.i("vitamin", "Failer");
@@ -97,7 +101,6 @@ public class CategoryFragments extends Fragment {
             }
         });
         recyclerAdapter.setData(datas);
-        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;

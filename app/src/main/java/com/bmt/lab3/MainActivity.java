@@ -1,11 +1,9 @@
 package com.bmt.lab3;
 
 import android.view.Menu;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.viewpager2.widget.ViewPager2;
-import com.bmt.lab3.R;
 import com.bmt.lab3.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
