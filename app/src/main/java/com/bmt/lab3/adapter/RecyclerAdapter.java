@@ -1,10 +1,8 @@
 package com.bmt.lab3.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,17 +16,20 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-public class RecyclerAdapter<T extends TopBar & Serializable>  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public interface IClicked<T>{
+public class RecyclerAdapter<T extends TopBar & Serializable> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public interface IClicked<T> {
         void isClicked(T data);
     }
+
     private List<T> datas;
     private IClicked<T> clicked;
-    public void setData(List<T> datas){
+
+    public void setData(List<T> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
-    public RecyclerAdapter(IClicked<T> clicked){
+
+    public RecyclerAdapter(IClicked<T> clicked) {
         this.clicked = clicked;
     }
 
@@ -44,15 +45,15 @@ public class RecyclerAdapter<T extends TopBar & Serializable>  extends RecyclerV
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         String name = "";
-        if(datas.get(position) instanceof Category){
+        if (datas.get(position) instanceof Category) {
             Category category = (Category) datas.get(position);
             name = category.getName();
             viewHolder.getTxt().setOnClickListener(view -> clicked.isClicked((T) category));
-        }else if(datas.get(position) instanceof TopPick){
+        } else if (datas.get(position) instanceof TopPick) {
             TopPick topPick = (TopPick) datas.get(position);
             name = topPick.getName();
             viewHolder.getTxt().setOnClickListener(view -> clicked.isClicked((T) topPick));
-        }else if(datas.get(position) instanceof OnSale){
+        } else if (datas.get(position) instanceof OnSale) {
             OnSale onSale = (OnSale) datas.get(position);
             name = onSale.getName();
             viewHolder.getTxt().setOnClickListener(view -> clicked.isClicked((T) onSale));
@@ -64,9 +65,11 @@ public class RecyclerAdapter<T extends TopBar & Serializable>  extends RecyclerV
     public int getItemCount() {
         return datas != null ? datas.size() : 0;
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txt;
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             txt = itemView.findViewById(R.id.txt);

@@ -1,10 +1,8 @@
 package com.bmt.lab3;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.adapter.RecyclerAdapter;
 import com.bmt.lab3.const2.URL;
 import com.bmt.lab3.dto.Category;
-import com.bmt.lab3.dto.Result;
-import com.bmt.lab3.dto.BaseModel;
-import com.bmt.lab3.repository.BaseModelRepository;
 import com.bmt.lab3.util.LoadData;
-import com.bmt.lab3.util.BaseModelParser;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class CategoryFragments extends Fragment {
 
@@ -39,7 +30,8 @@ public class CategoryFragments extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter<Category> recyclerAdapter;
 
-    public CategoryFragments(){}
+    public CategoryFragments() {
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -77,8 +69,8 @@ public class CategoryFragments extends Fragment {
         List<Category> datas = loadData.getCategories();
         recyclerView = view.findViewById(R.id.recyclerView);
 
-        recyclerAdapter = new RecyclerAdapter<>(category->{
-                URL.handleRecyclerView(category,getContext());
+        recyclerAdapter = new RecyclerAdapter<>(category -> {
+            URL.handleRecyclerView(category, getContext());
         });
         recyclerAdapter.setData(datas);
         recyclerView.setAdapter(recyclerAdapter);

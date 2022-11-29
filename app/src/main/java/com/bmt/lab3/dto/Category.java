@@ -1,18 +1,19 @@
 package com.bmt.lab3.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 public class Category extends TopBar implements Serializable {
     private String name;
     private String URL;
 
-    public Category(String name,  String URL) {
+    public Category(String name, String URL) {
         this.name = name;
         this.URL = URL;
     }
-    public Category(){}
+
+    public Category() {
+    }
+
     public String getName() {
         return name;
     }

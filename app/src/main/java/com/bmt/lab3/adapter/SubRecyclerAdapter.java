@@ -15,18 +15,22 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class SubRecyclerAdapter<T> extends RecyclerView.Adapter<SubRecyclerAdapter.SubViewHolder> {
-    public interface IClicked<T>{
+    public interface IClicked<T> {
         void isClicked(T data);
     }
+
     private IClicked<T> clicked;
     private List<T> datas;
-    public void setData(List<T> datas){
+
+    public void setData(List<T> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
-    public SubRecyclerAdapter(IClicked<T> clicked){
+
+    public SubRecyclerAdapter(IClicked<T> clicked) {
         this.clicked = clicked;
     }
+
     @NonNull
     @NotNull
     @Override
@@ -38,11 +42,11 @@ public class SubRecyclerAdapter<T> extends RecyclerView.Adapter<SubRecyclerAdapt
     @Override
     public void onBindViewHolder(@NonNull @NotNull SubRecyclerAdapter.SubViewHolder holder, int position) {
         SubViewHolder viewHolder = (SubViewHolder) holder;
-        if(datas.get(position) instanceof BaseModel){
+        if (datas.get(position) instanceof BaseModel) {
             BaseModel baseModel = (BaseModel) datas.get(position);
-            viewHolder.getTitle().setText(baseModel.getTitle()+"");
-            viewHolder.getCreateTime().setText(baseModel.getPubDate()+"");
-            viewHolder.getWrapper().setOnClickListener(v-> this.clicked.isClicked(datas.get(position)));
+            viewHolder.getTitle().setText(baseModel.getTitle() + "");
+            viewHolder.getCreateTime().setText(baseModel.getPubDate() + "");
+            viewHolder.getWrapper().setOnClickListener(v -> this.clicked.isClicked(datas.get(position)));
         }
     }
 
@@ -50,11 +54,13 @@ public class SubRecyclerAdapter<T> extends RecyclerView.Adapter<SubRecyclerAdapt
     public int getItemCount() {
         return datas != null ? datas.size() : 0;
     }
-    public class SubViewHolder extends RecyclerView.ViewHolder{
+
+    public class SubViewHolder extends RecyclerView.ViewHolder {
         private ImageView represent;
         private TextView title;
         private TextView createTime;
         private ConstraintLayout wrapper;
+
         public SubViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             represent = itemView.findViewById(R.id.represent);

@@ -3,13 +3,13 @@
     <item
             android:id="@+id/menu1"
             android:title="ON SALE"
-            app:showAsAction="always" />
+            app:showAsAction="always"/>
     <item
             android:id="@+id/menu2"
             android:title="TOP PICKS"
-            app:showAsAction="always" />
+            app:showAsAction="always"/>
     <item
             android:id="@+id/menu3"
             android:title="CATEGORIES"
-            app:showAsAction="always" />
+            app:showAsAction="always"/>
 </menu>

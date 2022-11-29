@@ -22,13 +22,15 @@ public class BaseModelParser {
     private static String TAG_ITEM = "item";
     public static BaseModelParser baseModelParser;
 
-    private BaseModelParser(){}
+    private BaseModelParser() {
+    }
 
-    public static BaseModelParser getInstance(){
-        if(baseModelParser == null)
+    public static BaseModelParser getInstance() {
+        if (baseModelParser == null)
             baseModelParser = new BaseModelParser();
         return baseModelParser;
     }
+
     public List<BaseModel> parseVitamin(InputStream inputStream) throws XmlPullParserException,
             IOException {
         String title = null;
@@ -49,18 +51,18 @@ public class BaseModelParser {
                 int eventType = xmlPullParser.getEventType();
 
                 String name = xmlPullParser.getName();
-                if(name == null)
+                if (name == null)
                     continue;
 
-                if(eventType == XmlPullParser.END_TAG) {
-                    if(name.equalsIgnoreCase("item")) {
+                if (eventType == XmlPullParser.END_TAG) {
+                    if (name.equalsIgnoreCase("item")) {
                         isItem = false;
                     }
                     continue;
                 }
 
                 if (eventType == XmlPullParser.START_TAG) {
-                    if(name.equalsIgnoreCase("item")) {
+                    if (name.equalsIgnoreCase("item")) {
                         isItem = true;
                         continue;
                     }
@@ -78,16 +80,16 @@ public class BaseModelParser {
                     description = result;
                 } else if (name.equalsIgnoreCase("guid")) {
                     guid = result;
-                }  else if (name.equalsIgnoreCase("pubDate")) {
+                } else if (name.equalsIgnoreCase("pubDate")) {
                     pubDate = result;
                 } else if (name.equalsIgnoreCase("link")) {
                     link = result;
-                } else if(name.equalsIgnoreCase("media:content")){
+                } else if (name.equalsIgnoreCase("media:content")) {
                     Log.i("result", result);
                 }
                 if (title != null && link != null && description != null && pubDate != null && guid != null) {
-                    if(isItem) {
-                        BaseModel item = new BaseModel(title, description, guid,pubDate,link);
+                    if (isItem) {
+                        BaseModel item = new BaseModel(title, description, guid, pubDate, link);
                         items.add(item);
                     }
                     title = null;

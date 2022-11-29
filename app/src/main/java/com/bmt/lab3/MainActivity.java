@@ -1,8 +1,8 @@
 package com.bmt.lab3;
 
+import android.os.Bundle;
 import android.view.Menu;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.viewpager2.widget.ViewPager2;
 import com.bmt.lab3.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     public ViewPager2 viewPager2;
     private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +56,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                switch (position){
-                    case 0 : bottomNavigationView.getMenu().findItem(R.id.menu1).setChecked(true); break;
-                    case 1 : bottomNavigationView.getMenu().findItem(R.id.menu2).setChecked(true); break;
-                    case 2 : bottomNavigationView.getMenu().findItem(R.id.menu3).setChecked(true); break;
+                switch (position) {
+                    case 0:
+                        bottomNavigationView.getMenu().findItem(R.id.menu1).setChecked(true);
+                        break;
+                    case 1:
+                        bottomNavigationView.getMenu().findItem(R.id.menu2).setChecked(true);
+                        break;
+                    case 2:
+                        bottomNavigationView.getMenu().findItem(R.id.menu3).setChecked(true);
+                        break;
                 }
             }
         });
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnItemSelectedListener(menuItem->{
-            switch (menuItem.getItemId()){
+        bottomNavigationView.setOnItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
                 case R.id.menu1:
                     viewPager2.setCurrentItem(0);
                     break;
@@ -82,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 }

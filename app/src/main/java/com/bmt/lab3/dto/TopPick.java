@@ -1,7 +1,5 @@
 package com.bmt.lab3.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 public class TopPick extends TopBar implements Serializable {
@@ -17,7 +15,9 @@ public class TopPick extends TopBar implements Serializable {
         return URL;
     }
 
-    public TopPick(){}
+    public TopPick() {
+    }
+
     public String getName() {
         return name;
     }

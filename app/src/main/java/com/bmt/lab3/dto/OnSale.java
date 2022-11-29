@@ -1,7 +1,5 @@
 package com.bmt.lab3.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 public class OnSale extends TopBar implements Serializable {
@@ -12,6 +10,7 @@ public class OnSale extends TopBar implements Serializable {
         this.name = name;
         this.URL = URL;
     }
+
     public String getURL() {
         return URL;
     }
@@ -20,7 +19,9 @@ public class OnSale extends TopBar implements Serializable {
         this.URL = URL;
     }
 
-    public OnSale(){}
+    public OnSale() {
+    }
+
     public String getName() {
         return name;
     }

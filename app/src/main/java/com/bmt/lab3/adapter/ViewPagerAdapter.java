@@ -21,13 +21,13 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                Log.e("FRAGMENTS","ONSALE");
+                Log.e("FRAGMENTS", "ONSALE");
                 return new OnSaleFragments();
             case 1:
-                Log.e("FRAGMENTS","TOPIC");
+                Log.e("FRAGMENTS", "TOPIC");
                 return new TopPickFragments();
             default:
-                Log.e("FRAGMENTS","CATEGORY");
+                Log.e("FRAGMENTS", "CATEGORY");
                 return new CategoryFragments();
         }
     }

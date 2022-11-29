@@ -27,7 +27,8 @@ public class OnSaleFragments extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter<OnSale> recyclerAdapter;
 
-    public OnSaleFragments(){}
+    public OnSaleFragments() {
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -65,8 +66,8 @@ public class OnSaleFragments extends Fragment {
         List<OnSale> datas = loadData.getOnSales();
         recyclerView = view.findViewById(R.id.recyclerView);
 
-        recyclerAdapter = new RecyclerAdapter<>(onSale->{
-            URL.handleRecyclerView(onSale,getContext());
+        recyclerAdapter = new RecyclerAdapter<>(onSale -> {
+            URL.handleRecyclerView(onSale, getContext());
         });
         recyclerAdapter.setData(datas);
         recyclerView = view.findViewById(R.id.recyclerView);

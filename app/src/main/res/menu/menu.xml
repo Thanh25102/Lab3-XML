@@ -4,5 +4,5 @@
             android:id="@+id/menu1"
             android:icon="@drawable/baseline_search_black_36"
             android:title="Menu 2"
-            app:showAsAction="always" />
+            app:showAsAction="always"/>
 </menu>

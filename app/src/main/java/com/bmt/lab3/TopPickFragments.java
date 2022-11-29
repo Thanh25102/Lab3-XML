@@ -27,7 +27,8 @@ public class TopPickFragments extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter<TopPick> recyclerAdapter;
 
-    public TopPickFragments(){}
+    public TopPickFragments() {
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -65,8 +66,8 @@ public class TopPickFragments extends Fragment {
         List<TopPick> datas = loadData.getTopPicks();
         recyclerView = view.findViewById(R.id.recyclerView);
 
-        recyclerAdapter = new RecyclerAdapter<>(topPick->{
-            URL.handleRecyclerView(topPick,getContext());
+        recyclerAdapter = new RecyclerAdapter<>(topPick -> {
+            URL.handleRecyclerView(topPick, getContext());
         });
         recyclerAdapter.setData(datas);
         recyclerView = view.findViewById(R.id.recyclerView);

@@ -6,10 +6,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import androidx.core.os.HandlerCompat;
-import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.LoadingActivity;
 import com.bmt.lab3.SubActivity;
-import com.bmt.lab3.adapter.RecyclerAdapter;
 import com.bmt.lab3.dto.*;
 import com.bmt.lab3.repository.BaseModelRepository;
 import com.bmt.lab3.util.BaseModelParser;
@@ -23,23 +21,24 @@ public class URL {
     public static ExecutorService executor = Executors.newFixedThreadPool(4);
     public static Handler mainThreadHandler = HandlerCompat.createAsync(Looper.getMainLooper());
     public static BaseModelParser baseModelParser = BaseModelParser.getInstance();
-    public static <T extends TopBar & Serializable> void handleRecyclerView(T model, Context context){
-        BaseModelRepository baseModelRepository = new BaseModelRepository(baseModelParser,executor,mainThreadHandler);
+
+    public static <T extends TopBar & Serializable> void handleRecyclerView(T model, Context context) {
+        BaseModelRepository baseModelRepository = new BaseModelRepository(baseModelParser, executor, mainThreadHandler);
         Intent loading = new Intent(context, LoadingActivity.class);
         context.startActivity(loading);
         String url = null;
-        if(model instanceof Category){
+        if (model instanceof Category) {
             url = ((Category) model).getURL();
-        }else if(model instanceof TopPick){
+        } else if (model instanceof TopPick) {
             url = ((TopPick) model).getURL();
-        }else if(model instanceof OnSale){
+        } else if (model instanceof OnSale) {
             url = ((OnSale) model).getURL();
         }
-        baseModelRepository.makeRequest(url,(callBack)->{
-            if(callBack instanceof Result.Success){
+        baseModelRepository.makeRequest(url, (callBack) -> {
+            if (callBack instanceof Result.Success) {
                 List<BaseModel> data = ((Result.Success<BaseModel>) callBack).datas;
                 Intent intent = new Intent(context, SubActivity.class);
-                intent.putExtra("data",(Serializable) data);
+                intent.putExtra("data", (Serializable) data);
                 context.startActivity(intent);
             } else {
                 Exception exception = ((Result.Error<BaseModel>) callBack).exception;

@@ -1,13 +1,13 @@
 package com.bmt.lab3;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.bmt.lab3.dto.BaseModel;
 
 public class DetailActivity extends AppCompatActivity {
-    private TextView title,description,pubDate,guid,link;
+    private TextView title, description, pubDate, guid, link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

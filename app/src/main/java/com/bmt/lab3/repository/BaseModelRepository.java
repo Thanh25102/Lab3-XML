@@ -1,8 +1,8 @@
 package com.bmt.lab3.repository;
 
 import android.os.Handler;
-import com.bmt.lab3.dto.Result;
 import com.bmt.lab3.dto.BaseModel;
+import com.bmt.lab3.dto.Result;
 import com.bmt.lab3.util.BaseModelParser;
 
 import java.io.InputStream;
@@ -25,23 +25,25 @@ public class BaseModelRepository {
         executor.execute(() -> {
             try {
                 Result<BaseModel> result = makeSynchronousRequest(urlStr);
-                notifyResult(result,callback);
-            }catch (Exception e){
-                Result<BaseModel> result = new Result.Error<>(e);;
-                notifyResult(result,callback);
+                notifyResult(result, callback);
+            } catch (Exception e) {
+                Result<BaseModel> result = new Result.Error<>(e);
+                ;
+                notifyResult(result, callback);
             }
         });
     }
 
     private void notifyResult(
-        final Result<BaseModel> result,
-        final RepositoryCallback<BaseModel> callback
-    ){
-        resultHandler.post(()->{
+            final Result<BaseModel> result,
+            final RepositoryCallback<BaseModel> callback
+    ) {
+        resultHandler.post(() -> {
             // callback UI work
             callback.onComplete(result);
         });
     }
+
     private Result<BaseModel> makeSynchronousRequest(String urlStr) {
         try {
             URL url = new URL(urlStr);
