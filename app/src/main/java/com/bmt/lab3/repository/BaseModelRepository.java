@@ -2,53 +2,53 @@ package com.bmt.lab3.repository;
 
 import android.os.Handler;
 import com.bmt.lab3.dto.Result;
-import com.bmt.lab3.dto.Vitamin;
-import com.bmt.lab3.util.VitaminParser;
+import com.bmt.lab3.dto.BaseModel;
+import com.bmt.lab3.util.BaseModelParser;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class VitaminRepository {
-    private final VitaminParser vitaminParser;
+public class BaseModelRepository {
+    private final BaseModelParser baseModelParser;
     private final Executor executor;
     private final Handler resultHandler;
 
-    public VitaminRepository(VitaminParser vitaminParser, Executor executor, Handler resultHandler) {
-        this.vitaminParser = vitaminParser;
+    public BaseModelRepository(BaseModelParser baseModelParser, Executor executor, Handler resultHandler) {
+        this.baseModelParser = baseModelParser;
         this.executor = executor;
         this.resultHandler = resultHandler;
     }
 
-    public void makeVitaminRequest(String urlStr, RepositoryCallback<Vitamin> callback) {
+    public void makeRequest(String urlStr, RepositoryCallback<BaseModel> callback) {
         executor.execute(() -> {
             try {
-                Result<Vitamin> result = makeSynchronousVitaminRequest(urlStr);
+                Result<BaseModel> result = makeSynchronousRequest(urlStr);
                 notifyResult(result,callback);
             }catch (Exception e){
-                Result<Vitamin> result = new Result.Error<>(e);;
+                Result<BaseModel> result = new Result.Error<>(e);;
                 notifyResult(result,callback);
             }
         });
     }
 
     private void notifyResult(
-        final Result<Vitamin> result,
-        final RepositoryCallback<Vitamin> callback
+        final Result<BaseModel> result,
+        final RepositoryCallback<BaseModel> callback
     ){
         resultHandler.post(()->{
             // callback UI work
             callback.onComplete(result);
         });
     }
-    private Result<Vitamin> makeSynchronousVitaminRequest(String urlStr) {
+    private Result<BaseModel> makeSynchronousRequest(String urlStr) {
         try {
             URL url = new URL(urlStr);
             InputStream inputStream = url.openConnection().getInputStream();
             Thread.sleep(5000);
-            List<Vitamin> vitamins = vitaminParser.parseVitamin(inputStream);
-            return new Result.Success<>(vitamins);
+            List<BaseModel> baseModels = baseModelParser.parseVitamin(inputStream);
+            return new Result.Success<>(baseModels);
         } catch (Exception e) {
             return new Result.Error<>(e);
         }

@@ -2,11 +2,7 @@ package com.bmt.lab3.util;
 
 import android.util.Log;
 import android.util.Xml;
-import com.bmt.lab3.dto.Vitamin;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import com.bmt.lab3.dto.BaseModel;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -15,7 +11,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VitaminParser {
+public class BaseModelParser {
     private static String TAG_CHANNEL = "channel";
     private static String TAG_TITLE = "title";
     private static String TAG_LINK = "link";
@@ -24,16 +20,16 @@ public class VitaminParser {
     private static String TAG_GUID = "guid";
 
     private static String TAG_ITEM = "item";
-    public static VitaminParser vitaminParser;
+    public static BaseModelParser baseModelParser;
 
-    private VitaminParser(){}
+    private BaseModelParser(){}
 
-    public static VitaminParser getInstance(){
-        if(vitaminParser == null)
-            vitaminParser = new VitaminParser();
-        return vitaminParser;
+    public static BaseModelParser getInstance(){
+        if(baseModelParser == null)
+            baseModelParser = new BaseModelParser();
+        return baseModelParser;
     }
-    public List<Vitamin> parseVitamin(InputStream inputStream) throws XmlPullParserException,
+    public List<BaseModel> parseVitamin(InputStream inputStream) throws XmlPullParserException,
             IOException {
         String title = null;
         String link = null;
@@ -42,7 +38,7 @@ public class VitaminParser {
         String guid = null;
         boolean isItem = false;
         String imageUrl = null;
-        List<Vitamin> items = new ArrayList<>();
+        List<BaseModel> items = new ArrayList<>();
         try {
             XmlPullParser xmlPullParser = Xml.newPullParser();
             xmlPullParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -91,7 +87,7 @@ public class VitaminParser {
                 }
                 if (title != null && link != null && description != null && pubDate != null && guid != null) {
                     if(isItem) {
-                        Vitamin item = new Vitamin(title, description, guid,pubDate,link);
+                        BaseModel item = new BaseModel(title, description, guid,pubDate,link);
                         items.add(item);
                     }
                     title = null;

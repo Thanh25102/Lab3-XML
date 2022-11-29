@@ -1,19 +1,15 @@
 package com.bmt.lab3.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
-public class Vitamin implements Serializable {
+public class BaseModel implements Serializable {
     private String title;
     private String description;
     private String guid;
     private String pubDate;
     private String link;
 
-    public Vitamin(String title, String description, String guid, String pubDate, String link) {
+    public BaseModel(String title, String description, String guid, String pubDate, String link) {
         this.title = title;
         this.description = description;
         this.guid = guid;
@@ -21,7 +17,7 @@ public class Vitamin implements Serializable {
         this.link = link;
     }
 
-    public Vitamin() {
+    public BaseModel() {
     }
 
     public String getTitle() {

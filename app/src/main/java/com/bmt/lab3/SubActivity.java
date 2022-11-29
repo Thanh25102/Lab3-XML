@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.adapter.SubRecyclerAdapter;
-import com.bmt.lab3.dto.Vitamin;
+import com.bmt.lab3.dto.BaseModel;
 
 import java.util.List;
 
@@ -17,12 +17,16 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
         Intent intent = getIntent();
-        List<Vitamin> vitamins =(List<Vitamin>) intent.getSerializableExtra("data");
+        List<BaseModel> baseModels =(List<BaseModel>) intent.getSerializableExtra("data");
 
         recyclerView = findViewById(R.id.recyclerSubView);
-        SubRecyclerAdapter<Vitamin> recyclerAdapter = new SubRecyclerAdapter<>((datas)->{});
+        SubRecyclerAdapter<BaseModel> recyclerAdapter = new SubRecyclerAdapter<>((data)->{
+            Intent detail = new Intent(this, DetailActivity.class);
+            detail.putExtra("data",data);
+            startActivity(detail);
+        });
 
-        recyclerAdapter.setData(vitamins);
+        recyclerAdapter.setData(baseModels);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

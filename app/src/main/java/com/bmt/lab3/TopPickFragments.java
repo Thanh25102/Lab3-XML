@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.adapter.RecyclerAdapter;
+import com.bmt.lab3.const2.URL;
 import com.bmt.lab3.dto.TopPick;
 import com.bmt.lab3.util.LoadData;
 
@@ -65,7 +66,7 @@ public class TopPickFragments extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
 
         recyclerAdapter = new RecyclerAdapter<>(topPick->{
-
+            URL.handleRecyclerView(topPick,getContext());
         });
         recyclerAdapter.setData(datas);
         recyclerView = view.findViewById(R.id.recyclerView);

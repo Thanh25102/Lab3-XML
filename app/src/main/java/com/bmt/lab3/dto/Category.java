@@ -6,14 +6,13 @@ import java.io.Serializable;
 
 public class Category extends TopBar implements Serializable {
     private String name;
-    private Class parserDTO;
+    private String URL;
 
-    public Category(String name,Class parserDTO) {
+    public Category(String name,  String URL) {
         this.name = name;
-        this.parserDTO = parserDTO;
+        this.URL = URL;
     }
     public Category(){}
-
     public String getName() {
         return name;
     }
@@ -22,18 +21,11 @@ public class Category extends TopBar implements Serializable {
         this.name = name;
     }
 
-    public Class getParserDTO() {
-        return parserDTO;
+    public String getURL() {
+        return URL;
     }
 
-    public void setParserDTO(Class parserDTO) {
-        this.parserDTO = parserDTO;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "name='" + name + '\'' +
-                '}';
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 }

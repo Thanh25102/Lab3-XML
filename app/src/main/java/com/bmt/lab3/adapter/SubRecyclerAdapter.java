@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.R;
-import com.bmt.lab3.dto.Vitamin;
+import com.bmt.lab3.dto.BaseModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -38,10 +38,11 @@ public class SubRecyclerAdapter<T> extends RecyclerView.Adapter<SubRecyclerAdapt
     @Override
     public void onBindViewHolder(@NonNull @NotNull SubRecyclerAdapter.SubViewHolder holder, int position) {
         SubViewHolder viewHolder = (SubViewHolder) holder;
-        if(datas.get(position) instanceof Vitamin){
-            Vitamin vitamin = (Vitamin) datas.get(position);
-            viewHolder.getTitle().setText(vitamin.getTitle()+"");
-            viewHolder.getCreateTime().setText(vitamin.getPubDate()+"");
+        if(datas.get(position) instanceof BaseModel){
+            BaseModel baseModel = (BaseModel) datas.get(position);
+            viewHolder.getTitle().setText(baseModel.getTitle()+"");
+            viewHolder.getCreateTime().setText(baseModel.getPubDate()+"");
+            viewHolder.getWrapper().setOnClickListener(v-> this.clicked.isClicked(datas.get(position)));
         }
     }
 

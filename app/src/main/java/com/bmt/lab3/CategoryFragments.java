@@ -16,10 +16,10 @@ import com.bmt.lab3.adapter.RecyclerAdapter;
 import com.bmt.lab3.const2.URL;
 import com.bmt.lab3.dto.Category;
 import com.bmt.lab3.dto.Result;
-import com.bmt.lab3.dto.Vitamin;
-import com.bmt.lab3.repository.VitaminRepository;
+import com.bmt.lab3.dto.BaseModel;
+import com.bmt.lab3.repository.BaseModelRepository;
 import com.bmt.lab3.util.LoadData;
-import com.bmt.lab3.util.VitaminParser;
+import com.bmt.lab3.util.BaseModelParser;
 
 import java.io.Serializable;
 import java.util.List;
@@ -77,28 +77,8 @@ public class CategoryFragments extends Fragment {
         List<Category> datas = loadData.getCategories();
         recyclerView = view.findViewById(R.id.recyclerView);
 
-
-        ExecutorService executor = Executors.newFixedThreadPool(4);
-        Handler mainThreadHandler = HandlerCompat.createAsync(Looper.getMainLooper());
-        VitaminParser vitaminParser = VitaminParser.getInstance();
-
         recyclerAdapter = new RecyclerAdapter<>(category->{
-            if(category.getParserDTO().equals(Vitamin.class)){
-                VitaminRepository vitaminRepository = new VitaminRepository(vitaminParser,executor,mainThreadHandler);
-                Intent loading = new Intent(getContext(),LoadingActivity.class);
-                startActivity(loading);
-                vitaminRepository.makeVitaminRequest(URL.VITAMIN_ALL,(callBack)->{
-                    if(callBack instanceof Result.Success){
-                        List<Vitamin> data = ((Result.Success<Vitamin>) callBack).datas;
-                        Intent intent = new Intent(getContext(),SubActivity.class);
-                        intent.putExtra("data",(Serializable) data);
-                        startActivity(intent);
-                    } else {
-                        Exception exception = ((Result.Error<Vitamin>) callBack).exception;
-                        Log.i("vitamin", "Failer");
-                    }
-                });
-            }
+                URL.handleRecyclerView(category,getContext());
         });
         recyclerAdapter.setData(datas);
         recyclerView.setAdapter(recyclerAdapter);

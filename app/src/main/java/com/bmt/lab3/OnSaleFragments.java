@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bmt.lab3.adapter.RecyclerAdapter;
+import com.bmt.lab3.const2.URL;
 import com.bmt.lab3.dto.OnSale;
 import com.bmt.lab3.util.LoadData;
 
@@ -63,8 +64,9 @@ public class OnSaleFragments extends Fragment {
         LoadData loadData = LoadData.getInstance();
         List<OnSale> datas = loadData.getOnSales();
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter<>(onSale->{
 
+        recyclerAdapter = new RecyclerAdapter<>(onSale->{
+            URL.handleRecyclerView(onSale,getContext());
         });
         recyclerAdapter.setData(datas);
         recyclerView = view.findViewById(R.id.recyclerView);
