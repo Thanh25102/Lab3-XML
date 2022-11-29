@@ -28,4 +28,10 @@ public class DetailActivity extends AppCompatActivity {
         guid.setText(baseModel.getGuid());
         link.setText(baseModel.getLink());
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

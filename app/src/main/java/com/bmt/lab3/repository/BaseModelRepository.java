@@ -28,7 +28,6 @@ public class BaseModelRepository {
                 notifyResult(result, callback);
             } catch (Exception e) {
                 Result<BaseModel> result = new Result.Error<>(e);
-                ;
                 notifyResult(result, callback);
             }
         });

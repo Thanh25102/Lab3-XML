@@ -24,7 +24,7 @@ public class LoadData {
                 new OnSale("Proteins On Sale", "https://www.petfoodindustry.com/rss/topic/292-proteins"),
                 new OnSale("Amino Acids On Sale", "https://www.petfoodindustry.com/rss/topic/293-amino-acids"),
                 new OnSale("Processing functional ingredients On Sale", "https://www.petfoodindustry.com/rss/topic/299-processing-functional-ingredients"),
-                new OnSale("Nutraceuticals On Sale", "https://www.petfoodindustry.com/rss/topic/298-nutraceuticals"),
+                new OnSale("Nutraceutical On Sale", "https://www.petfoodindustry.com/rss/topic/298-nutraceuticals"),
                 new OnSale("Fats and-Oils", "https://www.petfoodindustry.com/rss/topic/300-fats-and-oils"),
                 new OnSale("Preservatives On Sale", "https://www.petfoodindustry.com/rss/topic/301-preservatives"),
                 new OnSale("Dog and Cat Food Nutrition On Sale", "https://www.petfoodindustry.com/rss/topic/450-dog-and-cat-food-nutrition"),

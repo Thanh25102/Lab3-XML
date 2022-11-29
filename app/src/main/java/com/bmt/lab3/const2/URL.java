@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import androidx.core.os.HandlerCompat;
+import com.bmt.lab3.ErrorActivity;
 import com.bmt.lab3.LoadingActivity;
 import com.bmt.lab3.SubActivity;
 import com.bmt.lab3.dto.*;
@@ -24,8 +25,6 @@ public class URL {
 
     public static <T extends TopBar & Serializable> void handleRecyclerView(T model, Context context) {
         BaseModelRepository baseModelRepository = new BaseModelRepository(baseModelParser, executor, mainThreadHandler);
-        Intent loading = new Intent(context, LoadingActivity.class);
-        context.startActivity(loading);
         String url = null;
         if (model instanceof Category) {
             url = ((Category) model).getURL();
@@ -42,8 +41,12 @@ public class URL {
                 context.startActivity(intent);
             } else {
                 Exception exception = ((Result.Error<BaseModel>) callBack).exception;
-                Log.i("vitamin", "Failer");
+                Log.e("FETCH API", exception.getMessage());
+                Intent intent = new Intent(context, ErrorActivity.class);
+                context.startActivity(intent);
             }
         });
+        Intent loading = new Intent(context, LoadingActivity.class);
+        context.startActivity(loading);
     }
 }
